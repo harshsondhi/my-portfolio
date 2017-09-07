@@ -9,4 +9,4 @@ artifacts:
     - favicon.ico
     - Harsh_CoverLetterM.docx
     - styles/main.css
-    - image/*
+    - images/*
