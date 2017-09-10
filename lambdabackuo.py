@@ -1,6 +1,6 @@
 import boto3
-import StringIO
 import zipfile
+import StringIO
 
 def lambda_handler(event, context):
     sns = boto3.resource('sns')
