@@ -2,7 +2,8 @@ version: 0.1
 phases:
   build:
     command:
-      - echo Nothing to do yet
+      - npm install
+      - npm run webpack
 artifacts:
   files:
     - index.html
@@ -10,3 +11,4 @@ artifacts:
     - Harsh_CoverLetterM.docx
     - styles/main.css
     - images/*
+    - dist/bundle.js
