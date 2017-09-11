@@ -22,28 +22,46 @@ const myWork=[
   }
 ];
 
-
-
 describe("ExampleWorks component",() => {
   let component = shallow(<ExampleWork work={myWork}/>);
-   it("Should section element",() => {
-     expect(component.type()).toEqual('section');
-   });
-   it("Should contain children",() => {
-     expect(component.find("ExampleWorkBubble").length).toEqual(myWork.length);
- });
+  it("Should span element",()=>{
+    expect(component.type()).toEqual('span');
+  });
 
-describe("ExampleWorkBubble component",() => {
-     let component = shallow(<ExampleWorkBubble example={myWork[1]} />);
-     let images = component.find("img");
-     it("Should contain Single img",() =>{
-         expect(images.length).toEqual(1);
-     });
-     it("Should have correcct img src",() =>{
-          expect(images.node.props.src).toEqual(myWork[1].image.src);
-     });
+  it("Should contain children",()=>{
+    expect(component.find("ExampleWorkBubble").length).toEqual(myWork.length);
+  });
+
+  it("Shouls allow the model Oen and close",()=>{
+    component.instance().openModal();
+    expect(component.instance().state.modalOpen).toBe(true);
+    component.instance().closeModal();
+    expect(component.instance().state.modalOpen).toBe(false);
+  });
+
+
 });
 
+
+
+
+describe("ExampleWorkBubble component",()=>{
+  let mockOpenModalFn = jest.fn();
+  let component = shallow(<ExampleWorkBubble example={myWork[1]}
+    openModal={mockOpenModalFn} />);
+  let images = component.find("img");
+   it("Should contain Single img",()=>{
+     expect(images.length).toEqual(1);
+   });
+
+   it("Should have correcct img src",()=>{
+       expect(images.node.props.src).toEqual(myWork[1].image.src);
+   });
+
+   it("Should call the openModal handler when clicked",() => {
+       component.find(".section__exampleWrapper").simulate('click');
+       expect(mockOpenModalFn).toHaveBeenCalled();
+   });
 
 
 });

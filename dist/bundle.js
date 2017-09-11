@@ -9750,6 +9750,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 const myWork = [{
   'title': "Work Example",
+  'href': "https://example.com",
+  'desc': "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   'image': {
     'desc': "example screenshot of a project involving code",
     'src': "images/example1.png",
@@ -9757,6 +9759,8 @@ const myWork = [{
   }
 }, {
   'title': "Work Example",
+  'href': "https://example.com",
+  'desc': "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   'image': {
     'desc': "example screenshot of a project involving chemistry",
     'src': "images/example2.png",
@@ -9764,6 +9768,8 @@ const myWork = [{
   }
 }, {
   'title': "Work Example",
+  'href': "https://example.com",
+  'desc': "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   'image': {
     'desc': "example screenshot of a project involving cats",
     'src': "images/example3.png",
@@ -22418,16 +22424,48 @@ module.exports = __webpack_require__(22);
 /* unused harmony export ExampleWorkBubble */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(183);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__example_work_modal__ = __webpack_require__(185);
+
 
 
 class ExampleWork extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      'modalOpen': false,
+      'selectedExample': this.props.work[0]
+    };
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal(evt, example) {
+    this.setState({
+      'modalOpen': true,
+      'selectedExample': example
+    });
+  }
+
+  closeModal(evt, example) {
+    this.setState({
+      'modalOpen': false
+    });
+  }
+
   render() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      "section",
-      { className: "section section--alignCentered section--description" },
-      this.props.work.map((example, idx) => {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ExampleWorkBubble, { example: example, key: idx });
-      })
+      'span',
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'section',
+        { className: 'section section--alignCentered section--description' },
+        this.props.work.map((example, idx) => {
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ExampleWorkBubble, { example: example, key: idx,
+            openModal: this.openModal });
+        })
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__example_work_modal__["a" /* default */], { example: this.state.selectedExample,
+        open: this.state.modalOpen, closeModal: this.closeModal })
     );
   }
 }
@@ -22436,23 +22474,24 @@ class ExampleWorkBubble extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Co
   render() {
     let example = this.props.example;
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      "div",
-      { className: "section__exampleWrapper" },
+      'div',
+      { className: 'section__exampleWrapper',
+        onClick: evt => this.props.openModal(evt, example) },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "div",
-        { className: "section__example" },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { alt: example.image.desc,
-          className: "section__exampleImage",
+        'div',
+        { className: 'section__example' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { alt: example.image.desc,
+          className: 'section__exampleImage',
           src: example.image.src }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "dl",
-          { className: "color--cloud" },
+          'dl',
+          { className: 'color--cloud' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "dt",
-            { className: "section__exampleTitle section__text--centered" },
+            'dt',
+            { className: 'section__exampleTitle section__text--centered' },
             example.title
           ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("dd", null)
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('dd', null)
         )
       )
     );
@@ -22461,6 +22500,57 @@ class ExampleWorkBubble extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Co
 
 /* harmony default export */ __webpack_exports__["a"] = (ExampleWork);
 
+
+/***/ }),
+/* 185 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+class ExampleWorkModal extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  render() {
+    let example = this.props.example;
+    let modalClass = this.props.open ? 'modal--open' : 'modal--closed';
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { className: "background--skyBlue " + modalClass },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'span',
+        { className: 'color--cloud modal__closeButton',
+          onClick: this.props.closeModal },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-window-close-o' })
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { alt: example.image.desc,
+        className: 'modal__image',
+        src: example.image.src }),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'color--cloud modal__text' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'h2',
+          { className: 'modal__title' },
+          example.title
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'a',
+          { className: 'color--skyBlue modal__link',
+            href: example.href },
+          'Check it out'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'p',
+          { className: 'modal__description' },
+          example.desc
+        )
+      )
+    );
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (ExampleWorkModal);
 
 /***/ })
 /******/ ]);
